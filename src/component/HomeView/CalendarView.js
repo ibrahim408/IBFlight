@@ -1,41 +1,60 @@
-import React, { useRef } from 'react'
-import {View, Text, TouchableOpacity, Touchablew} from 'react-native'
+import React from 'react'
+import {View} from 'react-native'
 import styles from './styles';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import {Calendar} from 'react-native-calendars';
 
+// set minDate for today
+// set maxDate for 6 months ahead
 
+// if fromDate is selected than enter to date
 
-const renderCalendarWithSelectableDate = (ref) => {
-  return (
-    <View ref={ref} style={styles.calendarPickContainer} >
-      <Calendar
-        current={'2020-02-02'}
-        style={styles.calendar}
-      />
-    </View>
+const markDate = (flightType,fromDate,toDate) => {
+    if (flightType == 'oneWay'){
+        return {
+            [fromDate]: fromDate ? {selected: true, color: 'blue'} : null
+        }
+    } else {
+        return {
+            [fromDate]: fromDate ? {startingDay: true, selected: true, color: 'lightblue'} : null,
+            [toDate]: toDate ? {endingDay: true, selected: true, color: 'lightblue'} : null,
+        }
+    }
+}
 
-  );
-};
-
-const CalendarView = (props,ref) => {
+const CalendarView = (props) => {
+    const {currentDate, fromDate, toDate, maxDate, flightType} = props;
+    // console.log('current date: ', currentDate);
+    // console.log('from date: ', fromDate);
+    // console.log('from maxDate: ', maxDate);
+    // console.log('flight type: ', flightType);
     return (
-        <View style={styles.calendarContainer}>
-            <TouchableOpacity onPress={() => props.setVisible(true)} style={styles.calendarBoxContainer}>
-                <IconFontAwesome name="calendar-check-o" size={25} style={{marginRight: 10}} />
-                <Text>Fri 11/20</Text>
-            </TouchableOpacity>
-            <IconFontAwesome name="long-arrow-right" size={25} style={{marginLeft: 25}}/>
-            <TouchableOpacity onPress={() => props.setVisible(true)} style={styles.calendarBoxContainer}>
-                <IconFontAwesome name="calendar-check-o" size={25} style={{marginRight: 10}} />
-                <Text>Fri 11/20</Text>
-            </TouchableOpacity>
-            {props.visible ? renderCalendarWithSelectableDate(ref) : null}
-        </View>
+        <View style={styles.calendarPickContainer} >
+        <Calendar
+          current={currentDate}
+          minDate={currentDate}
+          maxDate={maxDate}
+          style={styles.calendar}
+          markedDates={markDate(flightType,fromDate,toDate)}
+          markingType={'period'}  
+          onDayPress={(day) => props.onDayPress(day)}
+          hideExtraDays={true}
+        />
+      </View>
     )
 }
 
+export default CalendarView;
 
-export default React.forwardRef(CalendarView);
+// if round trip:
+// markedDates={{
+//     [fromDate]: fromDate ? {startingDay: true, selected: true, color: 'lightblue'} : null,
+//     '2021-01-27': {endingDay: true, selected: true, color: 'lightblue'},
+//   }}
+
+
+// if oneway:
+// markedDates={{
+//     [fromDate]: fromDate ? {selected: true, marked: true, selectedColor: 'blue'} : null
+//   }}
 
 

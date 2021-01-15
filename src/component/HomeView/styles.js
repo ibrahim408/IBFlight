@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     calendarPickContainer: {
         position: 'absolute',
-        top: -100,
+        top: -180,
         left: 0,
         height: 20,
         width: '100%',

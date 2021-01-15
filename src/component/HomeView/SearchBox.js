@@ -1,9 +1,9 @@
 import React from 'react'
-import {View, TouchableOpacity, Text, TextInput} from 'react-native'
+import {View, TouchableOpacity, Text, TextInput, StyleSheet} from 'react-native'
 import styles from './styles';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-import Calendar from './CalendarView'
+import CalendarComponent from './CalendarComponent'
 
 const SearchBox = (props) => {
     return (
@@ -34,14 +34,40 @@ const SearchBox = (props) => {
                 />
             </View>
 
-            <Calendar ref={props.refProp}  visible={props.visible} setVisible={props.setVisible} />
+            <CalendarComponent 
+                flightType={props.flightType}
 
-            <TouchableOpacity style={styles.searchButton}>
-                <Text style={{color: 'white', fontSize: 24, fontWeight: '500'}}>Search</Text>
+                currentDate={props.currentDate}
+                fromDate={props.fromDate}
+                setFromDate={props.setFromDate}
+                toDate={props.toDate} 
+                setToDate={props.setToDate} 
+                fromDateText={props.fromDateText}
+                toDateText={props.toDateText} 
+                maxDate={props.maxDate}
+                onDayPress={props.onDayPress}
+                
+                visible={props.visible} 
+                setVisible={props.setVisible} 
+            />
+
+            <TouchableOpacity 
+                style={[styles.searchButton, props.visible ? stylesDos.searchButtonDos : null ]}
+                onPress={() => props.pressButton()}
+            >
+                <Text style={{color: 'white', fontSize: 24, fontWeight: '500'}}>{props.buttonText}</Text>
             </TouchableOpacity>
         </View>
     )
 };
+
+const stylesDos = StyleSheet.create({
+    searchButtonDos: {
+        backgroundColor: 'red',
+        shadowColor: 'red', 
+    }
+})
+
 export default SearchBox;
 
 

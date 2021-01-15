@@ -1,34 +1,89 @@
 import React, { useEffect, useState } from 'react'
 import HomeView from '../../component/HomeView'
-import {useOutsideAlerter} from '../../hooks/outsideAlert'
+import {flightHooks} from '../../hooks/flightHooks';
 
 const Home = ({navigation}) => {
-    const [tabNumber, setTabNumber] = useState(0);
-    const [flightType, setFlightType] = useState('oneWay');
-    const [fromText, setFromText] = useState('');
-    const [toText, setToText] = useState('');
-    
-    // const [visible, setVisible] = useState(false);
-    const {visible, ref, childrenIds, setChildrenId, setVisible} = useOutsideAlerter(false);
+
+    const {
+        tabNumber, 
+        setTabNumber,
+        flightType, 
+        setFlightType,
+        fromText, 
+        setFromText,
+        toText, 
+        setToText,
+        visible, 
+        setVisible,
+        buttonText, 
+        setButtonText,
+        currentDate, 
+        setCurrentDate,
+        fromDate,
+        setFromDate,
+        toDate,
+        setToDate,
+        fromDateText,
+        setFromDayText,
+        toDateText,
+        setToDayText,
+        maxDate,
+        setMaxDate
+    } = flightHooks();
+
+    const pressButton = () => {
+        if (visible){
+            setVisible(false);
+        }
+    };
+    const onDayPress = (day) => {
+        if (flightType == 'oneWay'){
+            setFromDate(day.dateString);
+          } else {       
+              if (!fromDate){
+                  setFromDate(day.dateString);
+              } else if (!toDate){
+                  setToDate(day.dateString)
+              } else if (day.dateString < toDate){
+                  setFromDate(day.dateString)
+              } else {
+                setFromDate(null);
+                setToDate(null);
+              }
+          }
+    };
+
     return (
         <HomeView 
             tabNumber={tabNumber} 
             setTabNumber={setTabNumber} 
+
             flightType={flightType} 
             setFlightType={setFlightType}  
+
             fromText={fromText} 
             setFromText={setFromText}   
             toText={toText} 
             setToText={setToText}   
+            
             visible={visible} 
-            setVisible={setVisible}   
-            childrenIds={childrenIds} 
-            setChildrenId={setChildrenId}
-            refProp={ref}   
+            setVisible={setVisible}
+            
+            currentDate={currentDate}
+            fromDate={fromDate}
+            setFromDate={setFromDate}
+            toDate={toDate} 
+            setToDate={setToDate}
+            fromDateText={fromDateText}
+            maxDate={maxDate}
+            toDateText={toDateText}
+            onDayPress={onDayPress} 
+            
+            pressButton ={pressButton}
+            buttonText={buttonText}
             navigation={navigation}
         />
     )
 }
 
 export default Home;
-//
