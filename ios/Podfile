@@ -7,7 +7,7 @@ target 'flightApp' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
-
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
   target 'flightAppTests' do
     inherit! :complete
     # Pods for testing
