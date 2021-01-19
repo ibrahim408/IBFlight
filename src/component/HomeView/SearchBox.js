@@ -1,9 +1,12 @@
 import React from 'react'
 import {View, TouchableOpacity, Text, TextInput, StyleSheet} from 'react-native'
 import styles from './styles';
+import {Colors} from '../../styles'
+
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import CalendarComponent from './CalendarComponent'
+import LinearGradient from 'react-native-linear-gradient';
 
 const SearchBox = (props) => {
     return (
@@ -50,18 +53,20 @@ const SearchBox = (props) => {
                 visible={props.visible} 
                 setVisible={props.setVisible} 
             />
-
-            <TouchableOpacity 
-                style={[styles.searchButton, props.visible ? stylesDos.searchButtonDos : null ]}
-                onPress={() => props.pressButton()}
-            >
-                <Text style={{color: 'white', fontSize: 24, fontWeight: '500'}}>{props.buttonText}</Text>
+            <TouchableOpacity style={[styles.searchButtonContainer]} onPress={() => props.pressButton()}>
+                <LinearGradient 
+                    start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
+                    colors={props.visible ? [Colors.REDONE, Colors.REDTWO, Colors.REDTHREE] : [Colors.BLUE, Colors.GREENBLUEMIX, Colors.GREEN]}
+                    style={[styles.searchButtonStyle]}
+                >
+                    <Text style={{color: 'white', fontSize: 24, fontWeight: '500'}}>{props.buttonText}</Text>
+                </LinearGradient>
             </TouchableOpacity>
         </View>
     )
 };
 
-const stylesDos = StyleSheet.create({
+ const stylesDos = StyleSheet.create({
     searchButtonDos: {
         backgroundColor: 'red',
         shadowColor: 'red', 

@@ -5,6 +5,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, 
         backgroundColor: Colors.GREY,
+        paddingTop: 150,
+        position: 'relative'
+    },
+    svgBackground: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        height: '55%',
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
     },
     cardContainer: {
         alignSelf: 'center',

@@ -34,6 +34,7 @@ const Home = ({navigation}) => {
     const pressButton = () => {
         if (visible){
             setVisible(false);
+            navigation.navigate('Detail');
         }
     };
     const onDayPress = (day) => {

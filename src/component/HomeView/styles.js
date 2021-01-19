@@ -6,7 +6,17 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 30,
         paddingTop: 80,
-        backgroundColor: Colors.GREY
+        backgroundColor: Colors.GREY,
+        position: 'relative'
+    },
+    svgBackground: {
+        position: 'absolute',
+        alignSelf: 'center',
+        bottom: '-5%',
+        width: '120%',
+        height: '55%',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
     },
     buttonListContainer: {
         flexDirection: 'row',
@@ -17,11 +27,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    touchableButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
+    touchableButtonContainer: {
         ...Buttons.smallRounded,
         marginBottom: 10,
+    },
+    touchableButtonStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 50
     },
     radioButtonsContainer: {
         marginTop: 60,
@@ -113,20 +127,23 @@ const styles = StyleSheet.create({
     calendar: {
 
     },
-    searchButton: {
+    searchButtonContainer: {
         position: 'absolute',
         alignSelf: 'center',
-        justifyContent: 'center',
-        alignItems: 'center',
         bottom: 30,
         width: '90%',
         height: 60,
-        backgroundColor: Colors.BLUE,
         borderRadius: 30,
-        shadowOffset: { height: 1, width: 1 }, 
-        shadowColor: Colors.BLUE, 
-        shadowOpacity: 0.5, 
-        shadowRadius: 10
+        overflow: 'hidden',
+        shadowOffset: { height: 5, width: 5 }, 
+        shadowOpacity: .8, 
+        shadowColor: 'red', 
+        shadowRadius: 20 
+    },
+    searchButtonStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 

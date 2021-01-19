@@ -3,56 +3,41 @@ import {View,Text, TouchableOpacity, StyleSheet} from 'react-native'
 import styles from './styles';
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
-
-
+import LinearGradient from 'react-native-linear-gradient';
+import {Colors} from '../../styles'
+const renderButton = (props,index,type,name) => {
+    return (
+        <View style={styles.buttonContainer}>
+            <TouchableOpacity 
+                onPress={ () => props.setTabNumber(index)} 
+                style={[styles.touchableButtonContainer, props.tabNumber == index ? stylesDos.selectedTab : null]}
+            >
+                <LinearGradient 
+                    colors={props.tabNumber == index ? [Colors.GREEN, Colors.GREENBLUEMIX, Colors.BLUE] : ['#ffffff','#ffffff','#ffffff']}
+                    style={styles.touchableButtonStyle}
+                >
+                    {type == 'plane' ? <IconFontisto name={type} size={35}/> : <IconFontAwesome name={type} size={35}/> }
+                </LinearGradient>
+            </TouchableOpacity>
+            <Text>{name}</Text>
+        </View>      
+    )
+}
 const TabButtons = (props) => {
     return (
         <View style={styles.buttonListContainer}>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity 
-                    onPress={ () => props.setTabNumber(0)} 
-                    style={[styles.touchableButton, props.tabNumber == 0 ? stylesDos.selectedTab : null]}
-                >
-                    <IconFontisto name="plane" size={35}/>
-                </TouchableOpacity>
-                <Text>Flight</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity 
-                    onPress={ () => props.setTabNumber(1)} 
-                    style={[styles.touchableButton, props.tabNumber == 1 ? stylesDos.selectedTab : null]}
-                >
-                    <IconFontAwesome name="bed" size={35}/>
-                </TouchableOpacity>
-                <Text>Hotels</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity 
-                    onPress={ () => props.setTabNumber(2)} 
-                    style={[styles.touchableButton, props.tabNumber == 2 ? stylesDos.selectedTab : null]}
-                >
-                    <IconFontAwesome name="subway" size={35}/>
-                </TouchableOpacity>
-                <Text>Trains</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity 
-                    onPress={ () => props.setTabNumber(3)} 
-                    style={[styles.touchableButton, props.tabNumber == 3 ? stylesDos.selectedTab : null]}
-                >
-                    <IconFontAwesome name="bus" size={35}/>
-                </TouchableOpacity>
-                <Text>Buses</Text>
-            </View>
+            {renderButton(props,0,'plane','Flights')}
+            {renderButton(props,1,'bed','Hotels')}
+            {renderButton(props,2,'subway','Trains')}
+            {renderButton(props,3,'bus','Buses')}
         </View>
     )
 }
 const stylesDos = StyleSheet.create({
     selectedTab: {
-        backgroundColor: '#29F698',
         shadowOffset: { height: 5, width: 5 }, 
         shadowOpacity: .8, 
-        shadowColor: '#29F698', 
+        shadowColor: Colors.GREENBLUEMIX, 
         shadowRadius: 20 
     }
 })
