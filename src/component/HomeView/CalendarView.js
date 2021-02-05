@@ -1,12 +1,8 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {View} from 'react-native'
 import styles from './styles';
 import {Calendar} from 'react-native-calendars';
-
-// set minDate for today
-// set maxDate for 6 months ahead
-
-// if fromDate is selected than enter to date
+import { Context } from '../../utility/context'
 
 const markDate = (flightType,fromDate,toDate) => {
     if (flightType == 'oneWay'){
@@ -21,12 +17,10 @@ const markDate = (flightType,fromDate,toDate) => {
     }
 }
 
-const CalendarView = (props) => {
-    const {currentDate, fromDate, toDate, maxDate, flightType} = props;
-    // console.log('current date: ', currentDate);
-    // console.log('from date: ', fromDate);
-    // console.log('from maxDate: ', maxDate);
-    // console.log('flight type: ', flightType);
+const CalendarView = () => {
+    const {state, onDayPress} = useContext(Context);
+    const {currentDate, fromDate, toDate, maxDate, flightType} = state;
+
     return (
         <View style={styles.calendarPickContainer} >
         <Calendar
@@ -36,7 +30,7 @@ const CalendarView = (props) => {
           style={styles.calendar}
           markedDates={markDate(flightType,fromDate,toDate)}
           markingType={'period'}  
-          onDayPress={(day) => props.onDayPress(day)}
+          onDayPress={(day) => onDayPress(day)}
           hideExtraDays={true}
         />
       </View>
@@ -44,17 +38,5 @@ const CalendarView = (props) => {
 }
 
 export default CalendarView;
-
-// if round trip:
-// markedDates={{
-//     [fromDate]: fromDate ? {startingDay: true, selected: true, color: 'lightblue'} : null,
-//     '2021-01-27': {endingDay: true, selected: true, color: 'lightblue'},
-//   }}
-
-
-// if oneway:
-// markedDates={{
-//     [fromDate]: fromDate ? {selected: true, marked: true, selectedColor: 'blue'} : null
-//   }}
 
 

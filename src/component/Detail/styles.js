@@ -1,5 +1,5 @@
 import { StyleSheet} from 'react-native';
-import {Buttons, Colors, Spacing, Typography} from '../../styles';
+import {Colors} from '../../styles';
 
 const styles = StyleSheet.create({
     container: {
@@ -40,8 +40,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     image: {
-        width: 60,
-        height: 60
+        width: 50,
+        height: 50,
+        marginLeft: 5,
+        marginRight: 10
     },
     airlineText: {
         fontSize: 16
@@ -64,12 +66,3 @@ const styles = StyleSheet.create({
 
 export default styles;
 
-
-// shadowRadius: 2,
-// shadowOffset: {
-//   width: 0,
-//   height: 3,
-// },
-// shadowColor: '#000000',
-// elevation: 4,
-// shadowOpacity: 1.0

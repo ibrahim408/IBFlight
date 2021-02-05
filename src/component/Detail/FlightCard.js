@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View} from 'react-native';
 import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient';
-import Feather from 'react-native-vector-icons/Feather'
 import SectionDetail from './SectionDetail'
 
 const FlightCard = ({flightDetail}) => {
@@ -27,9 +26,3 @@ const FlightCard = ({flightDetail}) => {
 }
 
 export default FlightCard;
-
-
-{/* <View style={{flexDirection: 'row'}}>
-<Text>6:00 am</Text>
-<Text>9:21 pm</Text>
-</View> */}

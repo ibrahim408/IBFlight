@@ -7,42 +7,13 @@ import SearchBox from './SearchBox'
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../styles'
 
-const HomeView = (props) => {
+const HomeView = () => {
     return (
         <View style={styles.container}>
             <LinearGradient colors={[Colors.GREEN, Colors.GREENBLUEMIX, Colors.BLUE]} style={styles.svgBackground} />
-            <Tabs 
-                setTabNumber={props.setTabNumber} 
-                tabNumber={props.tabNumber}
-            />
-            <RadioButtons 
-                flightType={props.flightType} 
-                setFlightType={props.setFlightType} 
-            />
-            <SearchBox 
-                flightType={props.flightType} 
-
-                fromText={props.fromText} 
-                setFromText={props.setFromText}   
-                toText={props.toText} 
-                setToText={props.setToText} 
-
-                visible={props.visible} 
-                setVisible={props.setVisible}
-                
-                currentDate={props.currentDate}
-                fromDate={props.fromDate}
-                setFromDate={props.setFromDate}
-                toDate={props.toDate}
-                setToDate={props.setToDate} 
-                fromDateText={props.fromDateText}
-                toDateText={props.toDateText} 
-                maxDate={props.maxDate}
-                onDayPress={props.onDayPress} 
-                
-                buttonText={props.buttonText}
-                pressButton={props.pressButton}
-            />
+            <Tabs />
+            <RadioButtons />
+            <SearchBox />
         </View>
     );
   };

@@ -5,12 +5,13 @@ import Feather from 'react-native-vector-icons/Feather'
 
 const SectionDetail = ({flightDetail, isReturnFlight}) => {
     const price = `$${flightDetail.price}`
+    const imagePath = flightDetail.airline == 'American Airlines'? require('../../assests/images/americanAirlines.png') : require('../../assests/images/jetBlue.png');
 
     return (
         <View style={{flex: 1}}>
             <View style={{flex: 1,flexDirection: 'row'}}>
                 <View style={{flex: 10, flexDirection: 'row', alignItems: 'center'}}>
-                    <Image style={styles.image} source={require('../../assests/images/americanAirlines.png')} ></Image>
+                    <Image style={styles.image} source={imagePath} ></Image>
                     <View>
                         <Text style={styles.airlineText}>{flightDetail.airline}</Text>
                     </View>

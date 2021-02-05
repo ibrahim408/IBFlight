@@ -1,19 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {View,Text, TouchableOpacity, StyleSheet} from 'react-native'
 import styles from './styles';
 import IconFontisto from 'react-native-vector-icons/Fontisto'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../styles'
-const renderButton = (props,index,type,name) => {
+import {Context} from '../../utility/context'
+
+const renderButton = (tabNumber,setTabNumber,index,type,name) => {
     return (
         <View style={styles.buttonContainer}>
             <TouchableOpacity 
-                onPress={ () => props.setTabNumber(index)} 
-                style={[styles.touchableButtonContainer, props.tabNumber == index ? stylesDos.selectedTab : null]}
+                onPress={ () => setTabNumber(index)} 
+                style={[styles.touchableButtonContainer, tabNumber == index ? stylesDos.selectedTab : null]}
             >
                 <LinearGradient 
-                    colors={props.tabNumber == index ? [Colors.GREEN, Colors.GREENBLUEMIX, Colors.BLUE] : ['#ffffff','#ffffff','#ffffff']}
+                    colors={tabNumber == index ? [Colors.GREEN, Colors.GREENBLUEMIX, Colors.BLUE] : ['#ffffff','#ffffff','#ffffff']}
                     style={styles.touchableButtonStyle}
                 >
                     {type == 'plane' ? <IconFontisto name={type} size={35}/> : <IconFontAwesome name={type} size={35}/> }
@@ -23,16 +25,21 @@ const renderButton = (props,index,type,name) => {
         </View>      
     )
 }
-const TabButtons = (props) => {
+
+const TabButtons = () => {
+    const {state} = useContext(Context);
+    const {tabNumber,setTabNumber} = state;
+
     return (
         <View style={styles.buttonListContainer}>
-            {renderButton(props,0,'plane','Flights')}
-            {renderButton(props,1,'bed','Hotels')}
-            {renderButton(props,2,'subway','Trains')}
-            {renderButton(props,3,'bus','Buses')}
+            {renderButton(tabNumber,setTabNumber,0,'plane','Flights')}
+            {renderButton(tabNumber,setTabNumber,1,'bed','Hotels')}
+            {renderButton(tabNumber,setTabNumber,2,'subway','Trains')}
+            {renderButton(tabNumber,setTabNumber,3,'bus','Buses')}
         </View>
     )
 }
+
 const stylesDos = StyleSheet.create({
     selectedTab: {
         shadowOffset: { height: 5, width: 5 }, 

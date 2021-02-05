@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import HomeView from '../../component/HomeView'
 import {flightHooks} from '../../hooks/flightHooks';
+import {Context} from '../../utility/context';
 
 const Home = ({navigation}) => {
 
@@ -16,25 +17,44 @@ const Home = ({navigation}) => {
         visible, 
         setVisible,
         buttonText, 
-        setButtonText,
         currentDate, 
-        setCurrentDate,
         fromDate,
         setFromDate,
         toDate,
         setToDate,
         fromDateText,
-        setFromDayText,
         toDateText,
-        setToDayText,
         maxDate,
-        setMaxDate
     } = flightHooks();
+
+    const state = {
+        tabNumber, 
+        setTabNumber,
+        flightType, 
+        setFlightType,
+        fromText, 
+        setFromText,
+        toText, 
+        setToText,
+        visible, 
+        setVisible,
+        buttonText, 
+        currentDate, 
+        fromDate,
+        setFromDate,
+        toDate,
+        setToDate,
+        fromDateText,
+        toDateText,
+        maxDate,    
+    };
 
     const pressButton = () => {
         if (visible){
             setVisible(false);
-            navigation.navigate('Detail');
+        } else {
+            if ((flightType == 'oneWay' && fromDate) || (fromDate && toDate))
+                navigation.navigate('Detail');
         }
     };
     const onDayPress = (day) => {
@@ -55,35 +75,9 @@ const Home = ({navigation}) => {
     };
 
     return (
-        <HomeView 
-            tabNumber={tabNumber} 
-            setTabNumber={setTabNumber} 
-
-            flightType={flightType} 
-            setFlightType={setFlightType}  
-
-            fromText={fromText} 
-            setFromText={setFromText}   
-            toText={toText} 
-            setToText={setToText}   
-            
-            visible={visible} 
-            setVisible={setVisible}
-            
-            currentDate={currentDate}
-            fromDate={fromDate}
-            setFromDate={setFromDate}
-            toDate={toDate} 
-            setToDate={setToDate}
-            fromDateText={fromDateText}
-            maxDate={maxDate}
-            toDateText={toDateText}
-            onDayPress={onDayPress} 
-            
-            pressButton ={pressButton}
-            buttonText={buttonText}
-            navigation={navigation}
-        />
+        <Context.Provider value={{state,pressButton,onDayPress,navigation}}>
+            <HomeView />
+        </Context.Provider>
     )
 }
 

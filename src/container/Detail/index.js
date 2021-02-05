@@ -1,9 +1,9 @@
 import React from 'react';
-import {View} from 'react-native'
 import DetailView from '../../component/Detail'
 
 const data = [
     {
+        key: '1',
         airline: 'American Airlines',
         price: '851',
         going: {
@@ -22,6 +22,7 @@ const data = [
         }
     },
     {
+        key: '2',
         airline: 'JetBlue Airlines',
         price: '721',
         going: {

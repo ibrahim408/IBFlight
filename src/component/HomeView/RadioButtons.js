@@ -1,17 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {View,Text, StyleSheet, TouchableOpacity} from 'react-native'
 import styles from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import {Colors} from '../../styles'
+import {Context} from '../../utility/context'
 
-const renderOption = (props,type,typeText) => {
+const renderOption = (flightType,setFlightType,type,typeText) => {
     return (
         <View style={styles.optionContainer}>
             <TouchableOpacity
-                onPress={ () => props.setFlightType(type)} 
-                style={[styles.radioButton, props.flightType == type ? stylesDos.radioShadow : null]}
+                onPress={ () => setFlightType(type)} 
+                style={[styles.radioButton, flightType == type ? stylesDos.radioShadow : null]}
             >
-                {props.flightType == type ? 
+                {flightType == type ? 
                     <LinearGradient 
                         colors={[Colors.GREEN, Colors.GREENBLUEMIX, Colors.BLUE]}
                         style={stylesDos.innerRadioButton}
@@ -26,14 +27,18 @@ const renderOption = (props,type,typeText) => {
     )    
 }
 
-const RadioButtons = (props) => {
+const RadioButtons = () => {
+    const {state} = useContext(Context);
+    const {flightType,setFlightType} = state;
+    
     return (
         <View style={styles.radioButtonsContainer}>
-            {renderOption(props,'oneWay', 'One way')}
-            {renderOption(props,'roundTrip', 'Round trip')}
+            {renderOption(flightType,setFlightType,'oneWay', 'One way')}
+            {renderOption(flightType,setFlightType,'roundTrip', 'Round trip')}
         </View>
     )
 }
+
 const stylesDos = StyleSheet.create({
     innerRadioButton: {
         width: '55%',
@@ -47,5 +52,6 @@ const stylesDos = StyleSheet.create({
         shadowRadius: 20 
     }
 })
+
 export default RadioButtons;
 
